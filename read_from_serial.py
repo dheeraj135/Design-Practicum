@@ -3,7 +3,7 @@ import time
 import csv
 import sys
 
-def read_from_serial(a,b,depth,filename = "test_runs/test_data.csv",port='/dev/ttyACM0',sample=100):
+def read_from_serial(a,b,depth,filename = "test_runs/sample.csv",port='/dev/ttyACM0',sample=100):
     ser = serial.Serial(port)
     ser.flushInput()
     curr_sample = 0
@@ -31,7 +31,9 @@ if __name__=='__main__':
     a = float(sys.argv[1])
     b = float(sys.argv[2])
     depth = float(sys.argv[3])
-    if(len(sys.argv)==5):
+    if(len(sys.argv)==4):
+        read_from_serial(a,b,depth,sample=10)
+    elif(len(sys.argv)==5):
         read_from_serial(a,b,depth,filename=sys.argv[4])
     elif len(sys.argv)==6:
         read_from_serial(a,b,depth,filename=sys.argv[4],port=sys.argv[5])
