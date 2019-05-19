@@ -1,13 +1,13 @@
-#define INDEX_SIZE 2        // size of pos[]
+#define INDEX_SIZE 9        // size of pos[]
 int currpos = 0;            //  currposition
-int pos[INDEX_SIZE] = {0,7};  // relative positions 0-7 means full rotati
+int pos[INDEX_SIZE] = {0,1,2,3,4,5,6,7,8};  // relative positions
 int index = 0;            // temp var for iteration
 int dirPin[] = {1,3};     //dir pins for horizontal motor
 int stepPin[] = {2,4};    // step pins for horizontal motor
 int vdirPin[] = {5,7};   // dir pins for vertical motors
 int vstepPin[] = {6,8};  // step pins of vertical motors
 int sp = 1000;  // sleep for motor
-int rotate = 130;  // num of rotations for each pos
+int rotate = 100;  // num of rotations for each pos
 float offset = 20;  //offset for outDir
 float ratio = 10;    // pos to real distance
 float disOut=0;      // distance between outer electrodes
@@ -85,16 +85,26 @@ void takeReading(int pos1){
 
 void loop()
 {
-  moveUpDown(1,1,1);
-  moveUpDown(0,1,1);
-  gotoPos(pos[index],currpos,0);
-  gotoPos(pos[index],currpos,1);
-  currpos = pos[index];
-  moveUpDown(1,0,0);
-  moveUpDown(0,0,0);
-  for(int i=0;i<20;i++){
-    takeReading(currpos);
-  }
-  index+=1;
-  index%=INDEX_SIZE;
+  
+  digitalWrite(5,LOW);
+    digitalWrite(6,LOW);
+   for(int i=0;i<rotate*7;i++)
+   {
+   digitalWrite(6,HIGH);
+   delayMicroseconds(sp);
+   digitalWrite(6,LOW);
+   delayMicroseconds(sp);
+ }
+//  moveUpDown(1,1,1);
+//  moveUpDown(0,1,1);
+//  gotoPos(pos[index],currpos,0);
+//  gotoPos(pos[index],currpos,1);
+//  currpos = pos[index];
+//  moveUpDown(1,0,0);
+//  moveUpDown(0,0,0);
+//  for(int i=0;i<20;i++){
+//    takeReading(currpos);
+//  }
+//  index+=1;
+//  index%=INDEX_SIZE;
 }
