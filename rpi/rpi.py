@@ -2,7 +2,7 @@ import serial
 import time
 import csv
 
-port = '/dev/ttyACM1'
+port = '/dev/ttyACM0'
 R = 10
 
 ser = serial.Serial(port)
