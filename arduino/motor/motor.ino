@@ -67,19 +67,19 @@ void moveUpDown(int m, int a, int hold){
  delay(1000);
 }
 
-void takeReading(int pos){
+void takeReading(int pos1){
   int value1 = analogRead(A7);
   int value2 = analogRead(A1);
   int value3 = analogRead(A4);
-  value2 = abs(value2-value3);
-  disOut = pos*ratio+offset;
-  char *str;
-  char *temp1, *temp2;
+  value2 = value2-value3;
+  disOut = pos1*ratio+offset;
+  char str[1000];
+  char temp1[100], temp2[100];
   dtostrf(disOut,0,4,temp1);
   dtostrf(disIn,0,4,temp2);
   sprintf(str,"%d %d %s %s",value1,value2,temp1,temp2);
-  Serial.print(str);
-  delay(100);
+  Serial.println(str);
+  delay(200);
 }
 
 
