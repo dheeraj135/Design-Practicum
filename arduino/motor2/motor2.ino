@@ -6,7 +6,7 @@ int dirPin[] = {1,3};     //dir pins for horizontal motor
 int stepPin[] = {2,4};    // step pins for horizontal motor
 int vdirPin[] = {5,7};   // dir pins for vertical motors
 int vstepPin[] = {6,8};  // step pins of vertical motors
-int sp = 1000;  // sleep for motor
+int sp = 5000;  // sleep for motor
 int rotate = 100;  // num of rotations for each pos
 float offset = 20;  //offset for outDir
 float ratio = 10;    // pos to real distance
@@ -88,13 +88,24 @@ void loop()
   
   digitalWrite(5,LOW);
     digitalWrite(6,LOW);
-   for(int i=0;i<rotate*7;i++)
+   for(int i=0;i<400;i++)
    {
    digitalWrite(6,HIGH);
    delayMicroseconds(sp);
    digitalWrite(6,LOW);
    delayMicroseconds(sp);
  }
+ delay(2000);
+ digitalWrite(5,HIGH);
+    digitalWrite(6,LOW);
+   for(int i=0;i<400;i++)
+   {
+   digitalWrite(6,HIGH);
+   delayMicroseconds(sp);
+   digitalWrite(6,LOW);
+   delayMicroseconds(sp);
+ }
+ delay(2000);
 //  moveUpDown(1,1,1);
 //  moveUpDown(0,1,1);
 //  gotoPos(pos[index],currpos,0);
