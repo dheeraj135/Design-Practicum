@@ -17,5 +17,3 @@ void loop(){
   Serial.println(value2);
   delay(500);
 }
-
-
