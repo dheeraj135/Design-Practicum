@@ -34,19 +34,26 @@ def getReading():
 
 ser.write(b'go ahead!\n')
 
+mapp ={}
 for i in range(5):
     rho = 0
     disOut = 0
     ser.flushInput()
     for j in range(20):
         (y1,x1)=getReading()
-        rho+=y1
-        disOut+=x1
-    rho/=20
-    disOut/=20
+        if(y1>=0):
+            if(x1 in mapp.keys()):
+                mapp[x1].append(y1)
+            else:
+                mapp[x1] = [y1]
 
-    with open(fname,"a") as f:
+for key in mapp.keys():
+    lst = mapp[key][:]
+    mapp[key] = sum(lst)/len(lst)
+
+with open(fname,"a") as f:
+    for key in mapp.keys():
         writer = csv.writer(f,delimiter=",")
-        writer.writerow([rho,disOut])
+        writer.writerow([mapp[key],key])
 
 os.system("python3 plot_from_csv.py "+fname)
